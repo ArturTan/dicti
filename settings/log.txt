@@ -1,2 +1,1 @@
-is_it_path:True
-path_of_lists:/home/artur/Dokumenty/python/slownik/listy/
+
