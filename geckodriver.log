@@ -1,0 +1,5 @@
+1494180293747	geckodriver	INFO	Listening on 127.0.0.1:59058
+1494180294796	geckodriver::marionette	INFO	Starting browser /usr/lib/firefox/firefox.sh with args ["-marionette"]
+1494180296136	Marionette	INFO	Listening on port 46218
+1494180296217	Marionette	WARN	TLS certificate errors will be ignored for this session
+[Child 22776] WARNING: pipe error (3): Połączenie zerwane przez drugą stronę: file /build/firefox-4Fdt0Z/firefox-53.0+build6/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 346
