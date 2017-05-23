@@ -1,6 +1,13 @@
-from selenium import webdriver
+#from selenium import webdriver
+
+#in first version I use selenium
+# (dict.cc denied access to Python urllib.request).
+# Since I have known how to change user agent
+# - selenium is not used in this version of translator.
+
 import re
 import os
+import requests
 
 
 class Translator(object):
@@ -55,10 +62,14 @@ class Translator(object):
     def word_list_file(self, path_of_lists):
         print ("Which file do you want to translate?")
         list_of_files = []
+
         for i in os.listdir(path_of_lists):
             print (os.listdir(path_of_lists).index(i) + 1, i)
-            list_of_files.append((os.listdir(path_of_lists).index(i) + 1, i))
+            list_of_files.append((os.listdir(path_of_lists).
+                                  index(i) + 1, i))
+
         num_file = input("Check number: ")
+
         for t in list_of_files:
             i, j = t
             if i == int(num_file):
@@ -86,17 +97,22 @@ class Translator(object):
 
         tlumaczenia = []
 
-        SEP = input("""Choose a separator which will delimite words and their translations [e.g. \"\\t\", ":\"] """)
-
-        driver = webdriver.Firefox()
+        SEP = input("""Choose a separator which will delimite words and their translations [e.g. PRESS TAB, ":\"] """)
 
         print("TRANSLATING...")
 
         for i in slowka:
             url = basic_url + str(i)
-            driver.get(url)
+            source = requests.get(url,
+                                    headers = {
+                                                "User-Agent":
+                                               'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) '
+                                               'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
 
-            source = driver.page_source
+                                       }
+                                    )
+
+            source = source.text
             if source.find("c1Arr = new Array") > -1:
                 s = source.find("c1Arr = new Array") + len("c1Arr = new Array(")
                 e = source.find("c2Arr")
@@ -116,7 +132,6 @@ class Translator(object):
             wyniki = wyniki.replace("\"", "")
             tlumaczenia.append(wyniki)
 
-        driver.close()
 
         file = input("Submit name of the file with translated words:")
 
@@ -125,6 +140,7 @@ class Translator(object):
 
         with open(file, 'w+') as f:
             for line in tlumaczenia:
+                print(line)
                 f.write(line + "\n")
 
         return 0

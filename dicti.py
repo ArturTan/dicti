@@ -1,10 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: UTF-8 -*-
 import os
 from translator import Translator as T
 
 
-print ("This program will help you "
+print ("Hello, this program will help you "
        "in creating tables \nof translations of German"
        " words to English equivalents.\n", sep="")
 
@@ -33,6 +31,7 @@ print(is_it_path, path_of_lists)
 x = T()
 
 x.translator(is_it_path, path_of_lists)
+
 
 
 
