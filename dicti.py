@@ -22,7 +22,7 @@ while True:
         else:
             continue
     else:
-        path_of_lists = t.directory_check()
+        path_of_lists = T.directory_check()
         is_it_path = True
         break
 
